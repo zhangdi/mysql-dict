@@ -4,6 +4,20 @@
 
 [![Build Status](https://travis-ci.org/zhangdi/mysql-dict.svg?branch=master)](https://travis-ci.org/zhangdi/mysql-dict)
 
+## 安装/使用
+
+下载 [mysql-dict.phar](https://github.com/zhangdi/mysql-dict/releases/download/0.1.1/mysql-dict.phar)
+
+执行命令:
+
+```bash
+php mysql-dict.phar generate output.md --format=markdown \
+  --host="你的 MySQL 主机" --db="你的数据库名" \
+  --username="你的 MySQL 用户名" --password="你的 MySQL 密码"
+```
+
+命令执行完成后会生成一个名为 output.md 的字典文件。
+
 ## 作者
 
 - Di Zhang | [Github](https://github.com/zhangdi/) | <zhangdi_me@163.com>
