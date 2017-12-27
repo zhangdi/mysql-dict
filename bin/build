@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * 构建工具，用于将程序打包为 Phar 包
+ */
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$pharFile = 'mysql-dict.phar';
+$expectDirs = [
+    '.git',
+    '.svn',
+    '.idea',
+    'bin/build',
+];
+if (file_exists($pharFile)) {
+    unlink($pharFile);
+}
+$phar = new Phar($pharFile, 0, $pharFile);
+
+$phar->startBuffering();
+$files = \yii\helpers\FileHelper::findFiles(dirname(__DIR__), [
+    'except' => $expectDirs
+]);
+$items = [];
+foreach ($files as $file) {
+    $name = str_replace(dirname(__DIR__), '', $file);
+    $items[$name] = $file;
+}
+$phar->buildFromIterator(new ArrayIterator($items));
+$content = file_get_contents(dirname(__DIR__) . '/bin/mysql-dict');
+$content = preg_replace('{^#!/usr/bin/env php\s*}', '', $content);
+$phar->addFromString('bin/mysql-dict', $content);
+$phar->stopBuffering();
+$phar->setDefaultStub('bin/mysql-dict');
+
+echo "Build finished!\n";

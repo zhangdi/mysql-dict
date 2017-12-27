@@ -1,0 +1,28 @@
+language: php
+
+php:
+- 7.0
+- 7.1
+
+sudo: false
+
+cache:
+  directories:
+  - $HOME/.composer/cache
+
+install:
+- flags="--ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress"
+- composer install $flags
+
+before_deploy:
+- php -d phar.readonly=0 bin/build
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file: mysql-dict.phar
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: zhangdi/mysql-dict
+    php:  '7.0'
