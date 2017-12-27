@@ -14,6 +14,9 @@ install:
 - flags="--ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress"
 - composer install $flags
 
+script:
+- ls -al
+
 before_deploy:
 - php -d phar.readonly=0 bin/build
 
