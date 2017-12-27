@@ -28,11 +28,15 @@ foreach ($files as $file) {
     $name = str_replace(dirname(__DIR__), '', $file);
     $items[$name] = $file;
 }
+
 $phar->buildFromIterator(new ArrayIterator($items));
 $content = file_get_contents(dirname(__DIR__) . '/bin/mysql-dict');
 $content = preg_replace('{^#!/usr/bin/env php\s*}', '', $content);
 $phar->addFromString('bin/mysql-dict', $content);
+
+$phar->compressFiles(Phar::GZ);
 $phar->stopBuffering();
+
 $phar->setDefaultStub('bin/mysql-dict');
 
 echo "Build finished!\n";
