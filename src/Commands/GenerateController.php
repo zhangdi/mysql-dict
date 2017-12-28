@@ -20,6 +20,10 @@ class GenerateController extends Controller
     ];
 
     /**
+     * @var string 标题
+     */
+    public $title;
+    /**
      * @var string MySQL 主机
      */
     public $host;
@@ -44,6 +48,7 @@ class GenerateController extends Controller
      */
     public $format = self::FORMAT_MARKDOWN;
 
+
     public function options($actionID)
     {
         $options = parent::options($actionID);
@@ -52,6 +57,7 @@ class GenerateController extends Controller
         $options[] = 'username';
         $options[] = 'password';
         $options[] = 'format';
+        $options[] = 'title';
         return $options;
     }
 
@@ -161,7 +167,10 @@ class GenerateController extends Controller
         $this->load();
         $generatorClass = self::$generators[$this->format];
         /** @var Generator $generator */
-        $generator = new $generatorClass($this->_tables);
+        $generator = new $generatorClass([
+            'title' => $this->title,
+            'tables' => $this->_tables,
+        ]);
 
         $rs = $generator->generate($output);
         if ($rs) {
