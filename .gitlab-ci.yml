@@ -1,0 +1,16 @@
+# This file is a template, and might need editing before it works on your project.
+# Select image from https://hub.docker.com/_/php/
+image: php:7.0
+
+# Select what we should cache between builds
+cache:
+  paths:
+  - $HOME/.composer/cache
+
+before_script:
+# Install and run Composer
+- curl -sS https://getcomposer.org/installer | php
+- php composer.phar --ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress
+
+build:
+- php bin/build
