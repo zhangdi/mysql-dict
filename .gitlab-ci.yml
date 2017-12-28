@@ -10,7 +10,7 @@ cache:
 before_script:
 # Install and run Composer
 - curl -sS https://getcomposer.org/installer | php
-- php composer.phar --ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress
+- php composer.phar install --ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress
 
 stages:
 - build
