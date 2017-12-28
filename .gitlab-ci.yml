@@ -12,5 +12,10 @@ before_script:
 - curl -sS https://getcomposer.org/installer | php
 - php composer.phar --ansi --prefer-dist --no-interaction --optimize-autoloader --no-suggest --no-progress
 
-build:
-- php bin/build
+stages:
+- build
+
+build_phar:
+  stage: build
+  script:
+  - php bin/build
