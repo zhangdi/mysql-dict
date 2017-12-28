@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace App\Generators;
 
 
 use yii\base\BaseObject;

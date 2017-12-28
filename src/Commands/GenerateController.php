@@ -4,7 +4,7 @@
 namespace App\Commands;
 
 
-use App\Generator;
+use App\Generators\Generator;
 use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\db\Connection;
@@ -14,9 +14,11 @@ use yii\helpers\Console;
 class GenerateController extends Controller
 {
     const FORMAT_MARKDOWN = 'markdown';
+    const FORMAT_EXCEL = 'excel';
 
     public static $generators = [
-        self::FORMAT_MARKDOWN => 'App\MarkdownGenerator',
+        self::FORMAT_MARKDOWN => 'App\Generators\MarkdownGenerator',
+        self::FORMAT_EXCEL=>'App\Generators\ExcelGenerator',
     ];
 
     /**

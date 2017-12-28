@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace App\Generators;
 
 
 class MarkdownGenerator extends Generator
