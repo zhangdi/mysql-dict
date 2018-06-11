@@ -74,7 +74,7 @@ class GenerateController extends Controller
                 'class' => 'yii\db\Connection',
                 'dsn' => "mysql:host={$this->host};dbname={$this->db}",
                 'username' => $this->username,
-                'password' => $this->username,
+                'password' => $this->password,
                 'charset' => $this->charset,
             ]);
             $db->open();
